@@ -29,13 +29,19 @@ const item = [
   },
   {
     id: 221,
-    image: require("../assets/images/top2.jpeg"),
+    image: require("../assets/images/top3.jpeg"),
     name: "Shirt",
     price: 120,
   },
   {
     id: 111,
-    image: require("../assets/images/top2.jpeg"),
+    image: require("../assets/images/top4.jpeg"),
+    name: "Shirt",
+    price: 120,
+  },
+  {
+    id: 112131,
+    image: require("../assets/images/top6.jpeg"),
     name: "Shirt",
     price: 120,
   },
@@ -151,7 +157,13 @@ export default function App() {
                 <TouchableOpacity onPress={() => navigation.navigate('Item',{item:item})} activeOpacity={0.8}>
                 <Image source={item.image} style={styles.posterImage} />
                 </TouchableOpacity>
-                
+                <Text style={styles.text}>
+                    {item.name}
+                </Text>
+                <View style={{flexDirection:"row"}}>
+                  <Text style={{ fontSize: 20,color:"orange", fontWeight: "bold" }}>$</Text>
+                  <Text style={styles.price}>{item.price}</Text>
+                </View>
               </Animated.View>
             </View>
           );
@@ -176,4 +188,6 @@ const styles = StyleSheet.create({
     margin: 0,
     marginBottom: 8,
   },
+  text:{ fontSize: 15, fontWeight: "bold" },
+  price:{ fontSize: 20, fontWeight: "bold" },
 });

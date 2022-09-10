@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 import React from 'react'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
@@ -10,10 +10,12 @@ export default function Nav() {
     const navigation = useNavigation();
     return (
         <View style={styles.homeScreenHeader}>
-            <TouchableOpacity onPress={()=>{navigation.navigate("Item")}}><FontAwesomeIcon icon={faBars} size={22} color="black" /></TouchableOpacity>
+            <TouchableOpacity><FontAwesomeIcon icon={faBars} size={22} color="black" /></TouchableOpacity>
             <View style={styles.headerRight}>
                 <FontAwesomeIcon icon={faMagnifyingGlass} size={22} color="black" />
-                <FontAwesomeIcon icon={faBagShopping} size={22} color="black" />
+                <TouchableOpacity onPress={()=>{navigation.navigate("Cart")}}>
+                    <FontAwesomeIcon icon={faBagShopping} size={22} color="black" />
+                </TouchableOpacity>
             </View>
         </View>
     )

@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faGreaterThan } from '@fortawesome/free-solid-svg-icons'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
+import { faShoppingBag } from '@fortawesome/free-solid-svg-icons'
 
 import { useNavigation } from '@react-navigation/native'
 
@@ -12,18 +13,24 @@ const HEIGHT = 350
 export default function Item(props) {
     const navigation = useNavigation();
     const item = props.route.params.item
-    console.log(item)
   return (
     <View style={styles.container}>
-     <TouchableOpacity 
-     onPress={()=>{navigation.navigate("Home")}}
+     <View
      style={{
-        position: 'absolute',
-        top: 22,
-        left: 20,
-      }}>
+      padding: 20,
+      width:"100%",
+      justifyContent: 'space-between',
+      flexDirection: 'row',
+    }}>
+     <TouchableOpacity 
+     onPress={()=>{navigation.navigate("Home")}}>
       <FontAwesomeIcon icon={faArrowLeft} size={26} color="black"  />
       </TouchableOpacity>
+     <TouchableOpacity 
+     onPress={()=>{navigation.navigate("Cart")}}>
+      <FontAwesomeIcon icon={faShoppingBag} size={26} color="black"  />
+      </TouchableOpacity>
+     </View>
       <Image source={item.image} style={styles.img}></Image>
       <LinearGradient
         colors={['transparent', 'white', 'transparent']}
@@ -105,7 +112,7 @@ const styles = StyleSheet.create({
   details: {
     display: 'flex',
     flexDirection: 'column',
-    marginTop: HEIGHT - 20,
+    marginTop: HEIGHT - 90,
     width: '100%',
     padding: 20,
   },
