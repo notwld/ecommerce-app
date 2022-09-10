@@ -11,13 +11,13 @@ export default function Cart() {
     <View style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
-          <FontAwesomeIcon icon={faArrowLeft} size={25} color="black" />
+          <FontAwesomeIcon icon={faArrowLeft} size={20} color="black" />
         </TouchableOpacity>
         <Text style={{ fontSize: 20, fontWeight: "bold" }}>My Cart</Text>
-        <FontAwesomeIcon icon={faShoppingBag} size={25} color="black" />
+        <FontAwesomeIcon icon={faShoppingBag} size={20} color="black" />
       </View>
       <ScrollView
-        contentContainerStyle={{ flexGrow: 1, marginTop: 20}}
+        contentContainerStyle={{ flexGrow: 1, marginTop: 25}}
         showsVerticalScrollIndicator={false}
       >
         <View style={styles.items}>
@@ -83,5 +83,5 @@ const styles = StyleSheet.create({
   totalText: { fontSize: 15, fontWeight: "bold", marginTop: 5, color: "grey" },
   priceText: { fontSize: 20, fontWeight: "bold" },
   totalContainer: { justifyContent: "space-between", flexDirection: "row", },
-  checkoutButton: { backgroundColor: "black", width: "100%", height: 50, justifyContent: "center", alignItems: "center", borderRadius: 10, marginTop: 10 }
+  checkoutButton: { backgroundColor: "black", width: "100%", height: 50, justifyContent: "center", alignItems: "center", borderRadius: 10, marginTop: 15 }
 })
