@@ -1,4 +1,3 @@
-[]: # Title: E Commerce App
-[]: # Author: blurryface
+# E Commerce App
 
 WIP
