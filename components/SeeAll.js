@@ -38,7 +38,7 @@ export default function SeeAll(props) {
 
 const styles = StyleSheet.create({
     SeeAllScreen: {
-        marginTop: 15,
+        marginTop: 0,
         padding:20,
         flex:1,
     },

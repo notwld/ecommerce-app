@@ -20,7 +20,11 @@ export default function Section({section,data}) {
         data={data}
         keyExtractor={id => data.id}
         renderItem={({ item }) => (
+            <TouchableOpacity activeOpacity={0.8} onPress={()=>navigation.navigate("Item",{
+                item : item
+            })}>
             <Image source={item.image} style={styles.categoryImage} />
+            </TouchableOpacity>
         )}
         numColumns={2}
     ></FlatList>

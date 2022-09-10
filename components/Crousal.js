@@ -8,17 +8,37 @@ import {
   Dimensions,
   SafeAreaView,
   Animated,
+  TouchableOpacity,
 } from "react-native";
 
 import { LinearGradient } from "expo-linear-gradient";
+import { useNavigation } from "@react-navigation/native";
 
-const images = [
-  require("../assets/images/top1.jpeg"),
-  require("../assets/images/top2.jpeg"),
-  require("../assets/images/top3.jpeg"),
-  require("../assets/images/top4.jpeg"),
-  require("../assets/images/top5.jpeg"),
-  require("../assets/images/top6.jpeg"),
+const item = [
+  {
+    id: 121,
+    image: require("../assets/images/top1.jpeg"),
+    name: "Shirt",
+    price: 120,
+  },
+  {
+    id: 912,
+    image: require("../assets/images/top2.jpeg"),
+    name: "Shirt",
+    price: 120,
+  },
+  {
+    id: 221,
+    image: require("../assets/images/top2.jpeg"),
+    name: "Shirt",
+    price: 120,
+  },
+  {
+    id: 111,
+    image: require("../assets/images/top2.jpeg"),
+    name: "Shirt",
+    price: 120,
+  },
 ];
 
 
@@ -43,7 +63,7 @@ function Backdrop({ scrollX }) {
         StyleSheet.absoluteFillObject,
       ]}
     >
-      {images.map((imagen, index) => {
+      {item.map((item, index) => {
         const inputRange = [
           (index - 1) * CONTAINER_WIDTH,
           index * CONTAINER_WIDTH,
@@ -57,7 +77,7 @@ function Backdrop({ scrollX }) {
         return (
           <Animated.Image
             key={index}
-            source={imagen}
+            source={item.image}
             style={[
               { width: width, height: HEIGHT_BACKDROP, opacity },
               StyleSheet.absoluteFillObject,
@@ -80,7 +100,7 @@ function Backdrop({ scrollX }) {
 
 export default function App() {
   const scrollX = React.useRef(new Animated.Value(0)).current;
-  
+  const navigation = useNavigation();
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar hidden />
@@ -100,7 +120,7 @@ export default function App() {
         snapToInterval={CONTAINER_WIDTH}
         decelerationRate={0}
         scrollEventThrottle={14}
-        data={images}
+        data={item}
         keyExtractor={(item) => item}
         renderItem={({ item, index }) => {
           const inputRange = [
@@ -128,7 +148,9 @@ export default function App() {
                   transform: [{ translateY: scrollY}],
                 }}
               >
-                <Image source={item} style={styles.posterImage} />
+                <TouchableOpacity onPress={() => navigation.navigate('Item',{item:item})} activeOpacity={0.8}>
+                <Image source={item.image} style={styles.posterImage} />
+                </TouchableOpacity>
                 
               </Animated.View>
             </View>

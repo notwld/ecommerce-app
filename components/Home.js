@@ -41,37 +41,37 @@ export default function Home() {
         {
             "id": 96,
             "image": require("../assets/images/top4.jpeg"),
-            "name": "Nike Air Max 270 React",
+            "name": "Shirt",
             "price": 120,
         },
         {
             "id": 97,
             "image": require("../assets/images/top5.jpeg"),
-            "name": "Nike Air Max 270 React",
+            "name": "Shirt",
             "price": 120,
         },
         {
             "id": 98,
             "image": require("../assets/images/top6.jpeg"),
-            "name": "Nike Air Max 270 React",
+            "name": "Shirt",
             "price": 120,
         },
         {
             "id": 1,
             "image": require("../assets/images/top1.jpeg"),
-            "name": "Nike Air Max 270 React",
+            "name": "Shirt",
             "price": 120,
         },
         {
             "id": 2,
             "image": require("../assets/images/top2.jpeg"),
-            "name": "Nike Air Max 270 React",
+            "name": "Shirt",
             "price": 120,
         },
         {
             "id": 3,
             "image": require("../assets/images/top3.jpeg"),
-            "name": "Nike Air Max 270 React",
+            "name": "Shirt",
             "price": 120,
         },
     ])

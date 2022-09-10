@@ -9,8 +9,10 @@ import { useNavigation } from '@react-navigation/native'
 
 const HEIGHT = 350
 
-export default function Item() {
+export default function Item(props) {
     const navigation = useNavigation();
+    const item = props.route.params.item
+    console.log(item)
   return (
     <View style={styles.container}>
      <TouchableOpacity 
@@ -22,7 +24,7 @@ export default function Item() {
       }}>
       <FontAwesomeIcon icon={faArrowLeft} size={26} color="black"  />
       </TouchableOpacity>
-      <Image source={require("../assets/images/top1.jpeg")} style={styles.img}></Image>
+      <Image source={item.image} style={styles.img}></Image>
       <LinearGradient
         colors={['transparent', 'white', 'transparent']}
         style={{
@@ -43,8 +45,8 @@ export default function Item() {
             width: '100%',
           }
         }>
-          <Text style={styles.title}>Shirt</Text>
-          <Text style={styles.price}>$<Text style={{color:"black"}}>10</Text></Text>
+          <Text style={styles.title}>{item.name}</Text>
+          <Text style={styles.price}>$<Text style={{color:"black"}}>{item.price}</Text></Text>
         </View>
         <View style={styles.reviews}>
           <View style={styles.reviewBox}>
