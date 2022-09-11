@@ -107,6 +107,24 @@ function Backdrop({ scrollX }) {
 export default function App() {
   const scrollX = React.useRef(new Animated.Value(0)).current;
   const navigation = useNavigation();
+  //loop for the images
+  // const renderItem = ({ item, index }) => {
+  //   const inputRange = [
+  //     (index - 1) * CONTAINER_WIDTH,
+  //     index * CONTAINER_WIDTH,
+  //     (index + 1) * CONTAINER_WIDTH,
+  //   ];
+
+  //   const translateX = scrollX.interpolate({
+  //     inputRange,
+  //     outputRange: [width, 0, -width],
+  //   });
+
+    setTimeout(() => {
+      scrollX.setValue(scrollX._value + 1);
+    }, 3000);
+
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar hidden />

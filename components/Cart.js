@@ -17,15 +17,15 @@ export default function Cart() {
         <FontAwesomeIcon icon={faShoppingBag} size={20} color="black" />
       </View>
       <ScrollView
-        contentContainerStyle={{ flexGrow: 1, marginTop: 25}}
+        contentContainerStyle={{ flexGrow: 1}}
         showsVerticalScrollIndicator={false}
       >
         <View style={styles.items}>
           <CartItem />
           <CartItem />
-
+          <CartItem />
         </View>
-        <View>
+        <View style={{flexGrow:1,marginBottom:10}}>
           <View style={styles.voucher}>
             <Text style={styles.voucherText}>Promo/Student Codes or Voucher</Text>
             <FontAwesomeIcon style={{ marginTop: 5 }} icon={faGreaterThan} size={12} color="black" />
@@ -56,7 +56,7 @@ export default function Cart() {
               <Text style={styles.priceText}>130</Text>
             </View>
           </View>
-          <TouchableOpacity style={styles.checkoutButton}>
+          <TouchableOpacity style={styles.checkoutButton} onPress={() => navigation.navigate("CheckOut")}>
             <Text style={{ color: "white", fontSize: 15, fontWeight: "bold" }}>Checkout</Text>
           </TouchableOpacity>
         </View>
@@ -70,12 +70,20 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    padding: 20
+    padding: 20,
+    paddingBottom: 0
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center'
+    alignItems: 'center',
+    // backgroundColor: '#fff',
+    paddingBottom: 20,
+    // borderBottomWidth: 1,
+  },
+  items: {
+    flex: 1,
+    marginBottom: 20
   },
   voucher: { justifyContent: "space-between", flexDirection: "row" },
   voucherText: { fontSize: 15, fontWeight: "bold" },

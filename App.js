@@ -6,6 +6,7 @@ import Item from './components/Item';
 import Category from './components/Category';
 import Cart from './components/Cart';
 import {StyleSheet, Text, View} from 'react-native';
+import CheckOut from './components/CheckOut';
 
 const Stack = createNativeStackNavigator();
 
@@ -21,6 +22,7 @@ export default function App() {
         <Stack.Screen name="Item" component={Item} />
         <Stack.Screen name="Category" component={Category} />
         <Stack.Screen name="Cart" component={Cart} />
+        <Stack.Screen name="CheckOut" component={CheckOut} />
       </Stack.Navigator>
     </NavigationContainer>
   );

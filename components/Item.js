@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Image, StyleSheet, Text, TouchableOpacity, View,Alert } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faGreaterThan } from '@fortawesome/free-solid-svg-icons'
@@ -9,10 +9,24 @@ import { faShoppingBag } from '@fortawesome/free-solid-svg-icons'
 import { useNavigation } from '@react-navigation/native'
 
 const HEIGHT = 350
-
+const default_cart ={}
 export default function Item(props) {
     const navigation = useNavigation();
     const item = props.route.params.item
+    const [cart, setCart] = React.useState(default_cart)
+    
+    const handleAddToCart = () => {
+        setCart({
+            ...cart,
+            [item.id]: {
+                ...item,
+                quantity: 1
+            }
+        })
+       Alert.alert("Added to cart")
+    }
+
+
   return (
     <View style={styles.container}>
      <View
@@ -85,7 +99,7 @@ export default function Item(props) {
             <View style={[styles.colorSelect, { backgroundColor: "blue" }]}></View>
           </View>
         </View>
-        <TouchableOpacity style={styles.addToCart} activeOpacity={0.8}>
+        <TouchableOpacity style={styles.addToCart} activeOpacity={0.8} onPress={()=>{ handleAddToCart(item)} }>
           <Text style={{ color: "white" }}>Add to Cart</Text>
         </TouchableOpacity>
       </View>

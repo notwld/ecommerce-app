@@ -7,6 +7,7 @@ import Nav from './Nav'
 
 
 export default function Home() {
+    
     const [categories, setCategories] = useState([
         {
             id: 134,
@@ -104,7 +105,8 @@ export default function Home() {
 const styles = StyleSheet.create({
     homeScreen: {
         padding: 20,
-        // marginBottom: 40,
+        // marginBottom: 40,'
+        paddingBottom: 0,
     },
     
     homeScreenBody: {

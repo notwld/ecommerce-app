@@ -35,7 +35,7 @@ export default function CartItem(props) {
 
 const styles = StyleSheet.create({
     itemContainer: {
-        flex: 1,
+        flexGrow: 1,
         marginBottom: 20,
         width: '100%',
         // borderWidth: 1,

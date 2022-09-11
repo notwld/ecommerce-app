@@ -10,7 +10,7 @@ export default function Nav() {
     const navigation = useNavigation();
     return (
         <View style={styles.homeScreenHeader}>
-            <TouchableOpacity><FontAwesomeIcon icon={faBars} size={22} color="black" /></TouchableOpacity>
+            <TouchableOpacity onPress={()=>{alert("owo")}}><FontAwesomeIcon icon={faBars} size={22} color="black" /></TouchableOpacity>
             <View style={styles.headerRight}>
                 <FontAwesomeIcon icon={faMagnifyingGlass} size={22} color="black" />
                 <TouchableOpacity onPress={()=>{navigation.navigate("Cart")}}>
