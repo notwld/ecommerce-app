@@ -1,12 +1,14 @@
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faArrowLeft, faArrowRight, faGreaterThan, faShoppingBag } from '@fortawesome/free-solid-svg-icons'
 import CartItem from './CartItem'
 import { useNavigation } from '@react-navigation/native'
-
+import useCart from '../components/custom_hooks/cart'
 export default function Cart() {
+  const { Cart,Subtotal} = useCart()
   const navigation = useNavigation()
+  const isEmpty = Object.keys(Cart()).length === 0
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -16,16 +18,18 @@ export default function Cart() {
         <Text style={{ fontSize: 20, fontWeight: "bold" }}>My Cart</Text>
         <FontAwesomeIcon icon={faShoppingBag} size={20} color="black" />
       </View>
-      <ScrollView
-        contentContainerStyle={{ flexGrow: 1}}
+      {!isEmpty ? <ScrollView
+        contentContainerStyle={{ flexGrow: 1 }}
         showsVerticalScrollIndicator={false}
       >
         <View style={styles.items}>
-          <CartItem />
-          <CartItem />
-          <CartItem />
+          {
+            Object.keys(Cart()).map((key) => {
+              return <CartItem key={key} item={Cart()[key]} />
+            })
+          }
         </View>
-        <View style={{flexGrow:1,marginBottom:10}}>
+        <View style={{ flexGrow: 1, marginBottom: 10 }}>
           <View style={styles.voucher}>
             <Text style={styles.voucherText}>Promo/Student Codes or Voucher</Text>
             <FontAwesomeIcon style={{ marginTop: 5 }} icon={faGreaterThan} size={12} color="black" />
@@ -36,7 +40,7 @@ export default function Cart() {
                 <Text style={styles.totalText}>Subtotal</Text>
                 <View style={{ flexDirection: "row" }}>
                   <Text style={{ color: "orange" }}>$</Text>
-                  <Text style={styles.priceText}>120</Text>
+                  <Text style={styles.priceText}>{Subtotal()}</Text>
                 </View>
               </View>
               <View style={styles.totalTextContainer}>
@@ -48,19 +52,25 @@ export default function Cart() {
               </View>
             </View>
           </View>
-          <View style={{ width: "100%", height: 10, borderBottomWidth: 1, borderColor: "grey", borderStyle: "dashed", marginBottom: 10}}></View>
+          <View style={{ width: "100%", height: 10, borderBottomWidth: 1, borderColor: "grey", borderStyle: "dashed", marginBottom: 10 }}></View>
           <View style={styles.totalContainer}>
             <Text style={styles.totalText}>Total</Text>
             <View style={{ flexDirection: "row" }}>
               <Text style={{ color: "orange" }}>$</Text>
-              <Text style={styles.priceText}>130</Text>
+              <Text style={styles.priceText}>{Subtotal()}</Text>
             </View>
           </View>
           <TouchableOpacity style={styles.checkoutButton} onPress={() => navigation.navigate("CheckOut")}>
             <Text style={{ color: "white", fontSize: 15, fontWeight: "bold" }}>Checkout</Text>
           </TouchableOpacity>
         </View>
-      </ScrollView>
+
+      </ScrollView> : <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <Text style={{ fontSize: 20, fontWeight: "bold" }}>Your cart is empty</Text>
+        <TouchableOpacity style={{ backgroundColor: "black", width: "100%", height: 50, justifyContent: "center", alignItems: "center", borderRadius: 10, marginTop: 15 }} onPress={() => navigation.navigate("Home")}>
+          <Text style={{ color: "white", fontSize: 15, fontWeight: "bold" }}>Continue Shopping</Text>
+        </TouchableOpacity>
+      </View>}
 
     </View>
   )

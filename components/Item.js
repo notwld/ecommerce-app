@@ -1,32 +1,38 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View,Alert } from 'react-native'
+import { Image, StyleSheet, Text, TouchableOpacity, View,Alert, FlatList } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faGreaterThan } from '@fortawesome/free-solid-svg-icons'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
 import { faShoppingBag } from '@fortawesome/free-solid-svg-icons'
+import React from 'react'
+import useCart from '../components/custom_hooks/cart'
 
 import { useNavigation } from '@react-navigation/native'
-
 const HEIGHT = 350
 const default_cart ={}
 export default function Item(props) {
+  const {Cart,addToCart,getSize} = useCart()
     const navigation = useNavigation();
     const item = props.route.params.item
-    const [cart, setCart] = React.useState(default_cart)
-    
+    const [currentIndex, setcurrentIndex] = React.useState(null)
+    const [size , setSize] = React.useState(null)
     const handleAddToCart = () => {
-        setCart({
-            ...cart,
-            [item.id]: {
-                ...item,
-                quantity: 1
-            }
-        })
-       Alert.alert("Added to cart")
+      if(size!=null && currentIndex!=null){
+        addToCart(item)
+          Alert.alert("Success", "Item added to cart")
+        }
+          else{
+            Alert.alert("Error", "Please select size")
+          }
     }
+    const sizes = ['S', 'M', 'L', 'XL']
 
-
+    const handleSize = (size,index) => {
+        setcurrentIndex(index===currentIndex?null:index)
+        setSize(size)
+        getSize(size)
+    }
   return (
     <View style={styles.container}>
      <View
@@ -37,7 +43,7 @@ export default function Item(props) {
       flexDirection: 'row',
     }}>
      <TouchableOpacity 
-     onPress={()=>{navigation.navigate("Home")}}>
+     onPress={()=>{navigation.goBack()}}>
       <FontAwesomeIcon icon={faArrowLeft} size={26} color="black"  />
       </TouchableOpacity>
      <TouchableOpacity 
@@ -80,14 +86,22 @@ export default function Item(props) {
         <View style={styles.size}>
           <Text style={styles.sizeText}>Select Size</Text>
           <View style={styles.sizeBox}>
-            <View style={styles.sizeSelect}><Text>S</Text></View>
-            <View style={styles.sizeSelect}><Text>M</Text></View>
-            <View style={styles.sizeSelect}><Text>L</Text></View>
-            <View style={styles.sizeSelect}><Text>XL</Text></View>
+            <FlatList
+              data={sizes}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              keyExtractor={(item, index) => index.toString()}
+
+              renderItem={({ item, index }) => (
+                <TouchableOpacity key={index} style={index === currentIndex?styles.selected:styles.sizeSelect} activeOpacity={0.2} onPress={()=>{ handleSize(item,index)} }>
+                <Text style={index === currentIndex?styles.selectedSize:styles.sizeText}>{item}</Text>
+              </TouchableOpacity>
+              )}
+            />
           </View>
 
         </View>
-        <View style={styles.color}>
+        {/* <View style={styles.color}>
           <Text style={styles.colorText}>Select Color</Text>
           <View style={styles.colorBox}>
             <View style={[styles.colorSelect, { backgroundColor: "red" }]}></View>
@@ -98,7 +112,7 @@ export default function Item(props) {
             <View style={[styles.colorSelect, { backgroundColor: "blue" }]}></View>
             <View style={[styles.colorSelect, { backgroundColor: "blue" }]}></View>
           </View>
-        </View>
+        </View> */}
         <TouchableOpacity style={styles.addToCart} activeOpacity={0.8} onPress={()=>{ handleAddToCart(item)} }>
           <Text style={{ color: "white" }}>Add to Cart</Text>
         </TouchableOpacity>
@@ -122,17 +136,17 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     zIndex: -1,
+    backgroundColor: 'white',
   },
   details: {
     display: 'flex',
     flexDirection: 'column',
-    marginTop: HEIGHT - 90,
+    marginTop: HEIGHT - 70,
     width: '100%',
     padding: 20,
   },
   reviews: {
-    marginTop: 0,
-    marginBottom: 10
+    marginTop: 5,
   },
   reviewText: {
     fontSize: 20,
@@ -145,7 +159,9 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    fontSize: 30,
+    fontSize: 18,
+    //break line
+    width: 200,
     fontWeight: 'bold',
     marginBottom: 10,
   },
@@ -158,13 +174,29 @@ const styles = StyleSheet.create({
   size: {
     display: 'flex',
     width: '100%',
-    marginTop: 0,
+    marginTop: 20,
+  },
+  selected: {
+    backgroundColor: 'black',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1,
+    // borderColor: 'grey',
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    margin: 7,
+    borderRadius: 8,
   },
   sizeText: {
     fontSize: 15,
     fontWeight: 'bold',
-    marginBottom: 10,
+    
 
+  },
+  selectedSize: {
+    fontSize: 15,
+    fontWeight: 'bold',
+    color: 'white',
   },
   sizeBox: {
     display: 'flex',
@@ -172,6 +204,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     width: '100%',
+    marginTop: 10,
   },
   sizeSelect: {
     justifyContent: 'center',
